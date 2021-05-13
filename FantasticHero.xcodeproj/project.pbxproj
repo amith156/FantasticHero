@@ -15,6 +15,8 @@
 		5840994A264C4B31006D492B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 58409934264C4B30006D492B /* GameScene.sks */; };
 		5840994B264C4B31006D492B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58409935264C4B30006D492B /* GameScene.swift */; };
 		5840994C264C4B31006D492B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58409936264C4B31006D492B /* Assets.xcassets */; };
+		587D3E3A264DE1D400718890 /* ReggaeOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */; };
+		58BAE0F4264DAEBC0088EC0F /* CategoriesOfPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		58409943264C4B31006D492B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58409946264C4B31006D492B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58409948264C4B31006D492B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ReggaeOne-Regular.ttf"; sourceTree = "<group>"; };
+		58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesOfPhysics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				58409934264C4B30006D492B /* GameScene.sks */,
 				58409935264C4B30006D492B /* GameScene.swift */,
 				58409936264C4B31006D492B /* Assets.xcassets */,
+				58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */,
+				587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */,
 			);
 			path = "FantasticHero Shared";
 			sourceTree = "<group>";
@@ -139,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5840994A264C4B31006D492B /* GameScene.sks in Resources */,
+				587D3E3A264DE1D400718890 /* ReggaeOne-Regular.ttf in Resources */,
 				58409944264C4B31006D492B /* Main.storyboard in Resources */,
 				58409949264C4B31006D492B /* Actions.sks in Resources */,
 				58409947264C4B31006D492B /* LaunchScreen.storyboard in Resources */,
@@ -155,6 +162,7 @@
 			files = (
 				5840994B264C4B31006D492B /* GameScene.swift in Sources */,
 				58409941264C4B31006D492B /* GameViewController.swift in Sources */,
+				58BAE0F4264DAEBC0088EC0F /* CategoriesOfPhysics.swift in Sources */,
 				5840993F264C4B31006D492B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
