@@ -56,15 +56,26 @@ class GameScene: SKScene {
             let previousPointTouch = touch.previousLocation(in: self)
             let presentPointTouch = touch.location(in: self)
             let amountDraggedX = presentPointTouch.x - previousPointTouch.x
+            let amountDraggedY = presentPointTouch.y - previousPointTouch.y
             player.position.x += amountDraggedX
+            player.position.y += amountDraggedY
+            
+            if(player.position.y > (gameArea.maxY) / 2) {
+                player.position.y = gameArea.maxY/2
+            }
+            
+            if(player.position.y < gameArea.minY) {
+                player.position.y = gameArea.minY
+            }
+            
             
             //if moved too far to right, bump it back to game area
             if(player.position.x > gameArea.maxX) {
                 player.position.x = gameArea.maxX
             }
             
-            //if moved too far to right, bump it back to game area
-            if (player.position.x < gameArea.minX) {
+            //if moved too far to left, bump it back to game area
+            if(player.position.x < gameArea.minX) {
                 player.position.x = gameArea.minX
             }
             
