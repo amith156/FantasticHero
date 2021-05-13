@@ -22,6 +22,8 @@ class GameScene: SKScene {
         
         gameArea = CGRect(x: margin, y: 0, width: playableWidth, height: size.height)
         super.init(size: size)
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +31,12 @@ class GameScene: SKScene {
     }
     
     
+
+
+}
+
+//MARK:- Override Function
+extension GameScene {
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
@@ -37,11 +45,11 @@ class GameScene: SKScene {
         background.zPosition = 0
         self.addChild(background)
         
-        
         player.setScale(3)
         player.position = CGPoint(x: self.size.width/2, y: self.size.height/6)
         player.zPosition = 2
         self.addChild(player)
+        
         
     }
     
@@ -78,15 +86,14 @@ class GameScene: SKScene {
             if(player.position.x < gameArea.minX) {
                 player.position.x = gameArea.minX
             }
-            
-            
         }
-        
-        
     }
-
+    
+    
+    
 }
 
+//MARK:- Helper Functions
 extension GameScene {
     
     func bulletFiring() {
@@ -102,4 +109,50 @@ extension GameScene {
     }
     
     
+    func enemyAttack() {
+        let randomStartX = randomRange(min: gameArea.minX, max: gameArea.maxX)
+        let RandomEndX = randomRange(min: gameArea.minX, max: gameArea.maxX)
+        
+        let startPoint = CGPoint(x: randomStartX, y: self.size.height + 1.4)
+        let endPont = CGPoint(x: RandomEndX, y: -20)
+        
+        let enemyBullet = SKSpriteNode(imageNamed: "bullet02")
+        enemyBullet.position = startPoint
+        enemyBullet.zPosition = 2
+        self.addChild(enemyBullet)
+        
+        let moveEnemyBullet = SKAction.move(to: endPont, duration: 1.3)
+        let deleteEnemyBullet = SKAction.removeFromParent()
+        enemyBullet.run(SKAction.sequence([moveEnemyBullet,deleteEnemyBullet]))
+        
+        enemyBullet.zRotation = calculateAngleRotate(dy : (endPont.y - startPoint.y), dx: (endPont.x - startPoint.x))
+        
+    }
+    
+    func startNewLevel() {
+        let waitToAttack = SKAction.wait(forDuration: 0.75)
+        let attack = SKAction.run(enemyAttack)
+        let continuousAttack = SKAction.repeatForever(SKAction.sequence([waitToAttack,attack]))
+        self.run(continuousAttack)
+    }
+    
+
+    
+}
+
+//MARK:- Utilities
+extension GameScene {
+    
+    func calculateAngleRotate(dy : CGFloat, dx: CGFloat) -> CGFloat {
+        return atan2(dy, dx)
+    }
+    
+    //rage from 0 to 1
+    func randomRange() -> CGFloat {
+        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+    }
+    
+    func randomRange(min : CGFloat, max : CGFloat) -> CGFloat {
+        return randomRange() * (max-min) + min
+    }
 }
