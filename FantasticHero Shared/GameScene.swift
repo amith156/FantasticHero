@@ -11,8 +11,12 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
     
     let gameArea : CGRect
     let player = SKSpriteNode(imageNamed: "hero01")
-    var gameLevel : Int = 0
+    var gameScore : Int = 0
     let scoreLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular")
+    var gameLevel :Int = 0
+    var lifeLineNumber = 5
+    let lifeLineLable = SKLabelNode(fontNamed: "ReggaeOne-Regular")
+    
     
     override init(size: CGSize) {
         
@@ -61,7 +65,10 @@ extension GameScene {
         player.zPosition = 2
         self.addChild(player)
         
+        
+        
         scoreFuction()
+        lifeLineFunction()
         startNewLevel()
     }
     
@@ -207,17 +214,48 @@ extension GameScene {
         
         let moveEnemyBullet = SKAction.move(to: endPont, duration: 1.5)
         let deleteEnemyBullet = SKAction.removeFromParent()
-        enemyBullet.run(SKAction.sequence([moveEnemyBullet,deleteEnemyBullet]))
+        let looseLifeBlock = SKAction.run(loseLife)
+        enemyBullet.run(SKAction.sequence([moveEnemyBullet,deleteEnemyBullet, looseLifeBlock]))
         
         enemyBullet.zRotation = calculateAngleRotate(dy : (endPont.y - startPoint.y), dx: (endPont.x - startPoint.x))
         
     }
     
     func startNewLevel() {
-        let waitToAttack = SKAction.wait(forDuration: 1.75)
+        gameLevel += 1
+        var waitToAttackDuration = TimeInterval()
+        if (self.action(forKey: "enemiesAttackKey") != nil) {
+            self.removeAction(forKey: "enemiesAttackKey")
+        }
+        
+        switch gameLevel {
+        case 1:
+            waitToAttackDuration = 1.75
+        case 2:
+            waitToAttackDuration = 1.3
+        case 3:
+            waitToAttackDuration = 0.9
+        case 4:
+            waitToAttackDuration = 0.5
+        default:
+            waitToAttackDuration = 1.5
+        }
+        
+        
+        let waitToAttack = SKAction.wait(forDuration: waitToAttackDuration)
         let attack = SKAction.run(enemyAttack)
         let continuousAttack = SKAction.repeatForever(SKAction.sequence([waitToAttack,attack]))
-        self.run(continuousAttack)
+        self.run(continuousAttack, withKey: "enemiesAttackKey")
+    }
+    
+    func lifeLineFunction() {
+        lifeLineLable.text = "Life: 5"
+        lifeLineLable.fontSize = 100
+        lifeLineLable.fontColor = SKColor.white
+        lifeLineLable.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        lifeLineLable.zPosition = 100
+        lifeLineLable.position = CGPoint(x: self.size.width - 10.0 , y: self.size.height - lifeLineLable.fontSize)
+        self.addChild(lifeLineLable)
     }
     
     func scoreFuction() {
@@ -254,9 +292,25 @@ extension GameScene {
 //MARK:- Utilities
 extension GameScene {
     
+    func loseLife() {
+        lifeLineNumber -= 1
+        lifeLineLable.text = "Life: \(lifeLineNumber)"
+        
+        let scaleUpAnimate = SKAction.scale(to: 1.5, duration: 0.3)
+        let ScaleDownAnimat = SKAction.scale(to: 1, duration: 0.2)
+        let changeColor = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 0)
+        let returnColor = SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: 0)
+        lifeLineLable.run(SKAction.sequence([changeColor,scaleUpAnimate,ScaleDownAnimat,returnColor]))
+    }
+    
     func addScore() {
-        gameLevel += 1
-        scoreLabel.text = "Score: \(gameLevel)"
+        gameScore += 1
+        scoreLabel.text = "Score: \(gameScore)"
+        
+        if(gameScore == 10 || gameScore ==  20 || gameScore == 30) {
+            
+            startNewLevel()
+        }
     }
     
     func calculateAngleRotate(dy : CGFloat, dx: CGFloat) -> CGFloat {
