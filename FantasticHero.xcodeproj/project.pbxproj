@@ -17,6 +17,7 @@
 		5840994C264C4B31006D492B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58409936264C4B31006D492B /* Assets.xcassets */; };
 		587D3E3A264DE1D400718890 /* ReggaeOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */; };
 		58BAE0F4264DAEBC0088EC0F /* CategoriesOfPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */; };
+		58DFEE80264E7F9400279CB0 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DFEE7F264E7F9400279CB0 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		58409948264C4B31006D492B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ReggaeOne-Regular.ttf"; sourceTree = "<group>"; };
 		58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesOfPhysics.swift; sourceTree = "<group>"; };
+		58DFEE7F264E7F9400279CB0 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				58409936264C4B31006D492B /* Assets.xcassets */,
 				58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */,
 				587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */,
+				58DFEE7F264E7F9400279CB0 /* GameOverScene.swift */,
 			);
 			path = "FantasticHero Shared";
 			sourceTree = "<group>";
@@ -114,7 +117,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					5840993A264C4B31006D492B = {
 						CreatedOnToolsVersion = 12.4;
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58DFEE80264E7F9400279CB0 /* GameOverScene.swift in Sources */,
 				5840994B264C4B31006D492B /* GameScene.swift in Sources */,
 				58409941264C4B31006D492B /* GameViewController.swift in Sources */,
 				58BAE0F4264DAEBC0088EC0F /* CategoriesOfPhysics.swift in Sources */,
@@ -308,7 +312,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4MQC7PD9AU;
 				INFOPLIST_FILE = "FantasticHero iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,7 +333,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4MQC7PD9AU;
 				INFOPLIST_FILE = "FantasticHero iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

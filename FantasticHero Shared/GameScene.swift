@@ -7,15 +7,25 @@
 
 import SpriteKit
 
+enum GameState {
+    case beforeGame
+    case duringGame
+    case afterGame
+}
+
+var gameScore : Int = 0
+
 class GameScene: SKScene , SKPhysicsContactDelegate {
     
+    var currentGameState = GameState.beforeGame
     let gameArea : CGRect
     let player = SKSpriteNode(imageNamed: "hero01")
-    var gameScore : Int = 0
+
     let scoreLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     var gameLevel :Int = 0
     var lifeLineNumber = 5
     let lifeLineLable = SKLabelNode(fontNamed: "ReggaeOne-Regular")
+    let tapToStartLable = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     
     
     override init(size: CGSize) {
@@ -45,6 +55,7 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
 extension GameScene {
     
     override func didMove(to view: SKView) {
+        gameScore = 0
         physicsWorld.contactDelegate = self
         let background = SKSpriteNode(imageNamed: "background")
         background.size = self.size
@@ -61,15 +72,19 @@ extension GameScene {
         player.physicsBody?.allowsRotation = false
         
         player.setScale(3)
-        player.position = CGPoint(x: self.size.width/2, y: self.size.height/6)
+        player.position = CGPoint(x: self.size.width/2, y: 0 - self.size.height)
         player.zPosition = 2
         self.addChild(player)
         
         
-        
+
+        tapToStartFuction()
         scoreFuction()
         lifeLineFunction()
-        startNewLevel()
+
+        
+        
+
     }
     
     
@@ -95,6 +110,7 @@ extension GameScene {
             }
             contactBodyA.node?.removeFromParent()
             contactBodyB.node?.removeFromParent()
+            gameOver()
 
         }
         
@@ -127,7 +143,14 @@ extension GameScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        bulletFiring()
+        
+        if(currentGameState == .beforeGame) {
+            startNewGame()
+        }
+        else if(currentGameState == .duringGame) {
+            bulletFiring()
+        }
+        
 //        enemyAttack()
     }
     
@@ -139,8 +162,11 @@ extension GameScene {
             let presentPointTouch = touch.location(in: self)
             let amountDraggedX = presentPointTouch.x - previousPointTouch.x
             let amountDraggedY = presentPointTouch.y - previousPointTouch.y
-            player.position.x += amountDraggedX
-            player.position.y += amountDraggedY
+            
+            if(currentGameState == .duringGame) {
+                player.position.x += amountDraggedX
+                player.position.y += amountDraggedY
+            }
             
             if(player.position.y > (gameArea.maxY) / 2) {
                 player.position.y = gameArea.maxY/2
@@ -170,9 +196,28 @@ extension GameScene {
 //MARK:- Helper Functions
 extension GameScene {
     
+    func startNewGame() {
+        currentGameState = .duringGame
+        
+        //deletes the "tap to start" button
+        let fadeOutAction = SKAction.fadeOut(withDuration: 0.5)
+        let deleteAction = SKAction.removeFromParent()
+        tapToStartLable.run(SKAction.sequence([fadeOutAction, deleteAction]))
+        
+        //moving the hero back to screen
+        let movePlayerToScreen = SKAction.moveTo(y: self.size.height*0.2, duration: 0.5)
+        let startLevelAction = SKAction.run(startNewLevel)
+        player.run(SKAction.sequence([movePlayerToScreen, startLevelAction]))
+        
+    }
+    
+    
+    
+    
     func bulletFiring() {
         
         let bullet = SKSpriteNode(imageNamed: "bullet")
+        bullet.name = "bullet"
         bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size)
         bullet.physicsBody?.affectedByGravity = false
         bullet.physicsBody?.isDynamic = true
@@ -199,6 +244,7 @@ extension GameScene {
         let endPont = CGPoint(x: RandomEndX, y: -20)
         
         let enemyBullet = SKSpriteNode(imageNamed: "torpedo")
+        enemyBullet.name = "enemyBullet"
         enemyBullet.physicsBody = SKPhysicsBody(rectangleOf: enemyBullet.size)
         enemyBullet.physicsBody?.affectedByGravity = false
         enemyBullet.physicsBody?.isDynamic = true
@@ -215,7 +261,10 @@ extension GameScene {
         let moveEnemyBullet = SKAction.move(to: endPont, duration: 1.5)
         let deleteEnemyBullet = SKAction.removeFromParent()
         let looseLifeBlock = SKAction.run(loseLife)
-        enemyBullet.run(SKAction.sequence([moveEnemyBullet,deleteEnemyBullet, looseLifeBlock]))
+        if(currentGameState == .duringGame) {
+            enemyBullet.run(SKAction.sequence([moveEnemyBullet,deleteEnemyBullet, looseLifeBlock]))
+        }
+        
         
         enemyBullet.zRotation = calculateAngleRotate(dy : (endPont.y - startPoint.y), dx: (endPont.x - startPoint.x))
         
@@ -254,7 +303,8 @@ extension GameScene {
         lifeLineLable.fontColor = SKColor.white
         lifeLineLable.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         lifeLineLable.zPosition = 100
-        lifeLineLable.position = CGPoint(x: self.size.width - 10.0 , y: self.size.height - lifeLineLable.fontSize)
+        lifeLineLable.position = CGPoint(x: self.size.width - 10.0 , y: self.size.height + lifeLineLable.frame.size.height)
+        lifeLineLable.run(SKAction.moveTo(y: self.size.height - lifeLineLable.frame.size.height , duration: 0.3))
         self.addChild(lifeLineLable)
     }
     
@@ -264,13 +314,23 @@ extension GameScene {
         scoreLabel.fontColor = SKColor.white
         scoreLabel.fontSize = 100
 //        scoreLabel.position = CGPoint(x: self.size.width*0.15, y: self.size.height*0.9)
-        scoreLabel.position = CGPoint(x: 10.0, y: self.size.height-scoreLabel.fontSize)
+        scoreLabel.position = CGPoint(x: 10.0, y: self.size.height + scoreLabel.frame.size.height)
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        
+        scoreLabel.run(SKAction.moveTo(y: self.size.height - scoreLabel.frame.size.height , duration: 0.3))
         self.addChild(scoreLabel)
     }
     
-    
+    func tapToStartFuction() {
+        tapToStartLable.text = "Tap To Start"
+        tapToStartLable.fontSize = 100
+        tapToStartLable.zPosition = 1
+        tapToStartLable.fontColor = SKColor.white
+        tapToStartLable.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        tapToStartLable.alpha = 0
+        self.addChild(tapToStartLable)
+        tapToStartLable.run(SKAction.fadeIn(withDuration: 0.4))
+    }
+
     
     func explosionOnContact(explosionPosition : CGPoint) {
         
@@ -292,6 +352,37 @@ extension GameScene {
 //MARK:- Utilities
 extension GameScene {
     
+    func gameOver() {
+        
+        currentGameState = .afterGame
+        
+        self.removeAllActions()
+        self.enumerateChildNodes(withName: "enemyBullet") { enemyBullet, stop in
+            enemyBullet.removeAllActions()
+        }
+        
+        self.enumerateChildNodes(withName: "bullet") { bullet, stop in
+            bullet.removeAllActions()
+        }
+        
+        let changeSceneAction = SKAction.run(changeToNewScene)
+        
+        let waitToChangeScene = SKAction.wait(forDuration: 1)
+        self.run(SKAction.sequence([waitToChangeScene, changeSceneAction]))
+        
+        
+        
+    }
+    
+    
+    func changeToNewScene() {
+        let moveToGameOverScene = GameOverScene(size: self.size)
+        moveToGameOverScene.scaleMode = self.scaleMode
+        let transition = SKTransition.flipVertical(withDuration: 0.5)
+        self.view?.presentScene(moveToGameOverScene, transition: transition)
+    }
+    
+    
     func loseLife() {
         lifeLineNumber -= 1
         lifeLineLable.text = "Life: \(lifeLineNumber)"
@@ -301,6 +392,10 @@ extension GameScene {
         let changeColor = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 0)
         let returnColor = SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: 0)
         lifeLineLable.run(SKAction.sequence([changeColor,scaleUpAnimate,ScaleDownAnimat,returnColor]))
+        
+        if(lifeLineNumber == 0) {
+            gameOver()
+        }
     }
     
     func addScore() {
