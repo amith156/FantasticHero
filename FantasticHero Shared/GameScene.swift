@@ -19,9 +19,9 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
     
     var currentGameState = GameState.beforeGame
     let gameArea : CGRect
-    let player = SKSpriteNode(imageNamed: "hero01")
-    let enemy = SKSpriteNode(imageNamed: "monster")
 
+    let enemy = SKSpriteNode(imageNamed: "monster")
+    let player : SKSpriteNode
     let scoreLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     var gameLevel :Int = 0
     var lifeLineNumber = 5
@@ -31,6 +31,12 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
 
     
     override init(size: CGSize) {
+
+        if (femailHero) {
+            self.player = SKSpriteNode(imageNamed: "hero02")
+        } else {
+            self.player = SKSpriteNode(imageNamed: "hero01")
+        }
         
         enemyLiveCounter = 0
 

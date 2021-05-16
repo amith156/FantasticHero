@@ -7,6 +7,9 @@
 
 import Foundation
 import SpriteKit
+
+var femailHero  = false
+
 class MainMenuScene : SKScene {
     
     let heroA = SKSpriteNode(imageNamed: "AHero")
@@ -144,15 +147,19 @@ class MainMenuScene : SKScene {
             }
             
             if(pointOfNode.name == "heroA") {
+                femailHero = false
                 checkFunction(checkMarkPosition: heroA.position, heroSize: heroA.size)
             }
             else if(pointOfNode.name == "heroB") {
+                femailHero = false
                 checkFunction(checkMarkPosition: heroB.position, heroSize: heroB.size)
             }
             else if(pointOfNode.name == "heroC") {
+                femailHero = true
                 checkFunction(checkMarkPosition: heroC.position, heroSize: heroC.size)
             }
             else if(pointOfNode.name == "heroD") {
+                femailHero = false
                 checkFunction(checkMarkPosition: heroD.position, heroSize: heroD.size)
             }
             
