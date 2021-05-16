@@ -65,13 +65,13 @@
 			children = (
 				58409933264C4B30006D492B /* Actions.sks */,
 				58409934264C4B30006D492B /* GameScene.sks */,
-				58409935264C4B30006D492B /* GameScene.swift */,
 				582EBCCA264F2AA300A06CF6 /* MainMenuScene.swift */,
-				58103475264F6D7900E21DF0 /* Lora-Regular.ttf */,
-				58409936264C4B31006D492B /* Assets.xcassets */,
-				58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */,
-				587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */,
+				58409935264C4B30006D492B /* GameScene.swift */,
 				58DFEE7F264E7F9400279CB0 /* GameOverScene.swift */,
+				58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */,
+				58409936264C4B31006D492B /* Assets.xcassets */,
+				58103475264F6D7900E21DF0 /* Lora-Regular.ttf */,
+				587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */,
 			);
 			path = "FantasticHero Shared";
 			sourceTree = "<group>";

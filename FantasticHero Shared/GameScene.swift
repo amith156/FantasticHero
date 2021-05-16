@@ -20,16 +20,20 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
     var currentGameState = GameState.beforeGame
     let gameArea : CGRect
     let player = SKSpriteNode(imageNamed: "hero01")
+    let enemy = SKSpriteNode(imageNamed: "monster")
 
     let scoreLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     var gameLevel :Int = 0
     var lifeLineNumber = 5
     let lifeLineLable = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     let tapToStartLable = SKLabelNode(fontNamed: "ReggaeOne-Regular")
-    
+    var enemyLiveCounter : Int
+
     
     override init(size: CGSize) {
         
+        enemyLiveCounter = 0
+
         let aspectRatioMax : CGFloat = 16.0/9.0
         let playableWidth = size.height / aspectRatioMax
 
@@ -38,7 +42,7 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
         
         gameArea = CGRect(x: margin, y: 0, width: playableWidth, height: size.height)
         super.init(size: size)
-        
+
         
     }
     
@@ -76,7 +80,8 @@ extension GameScene {
         player.zPosition = 2
         self.addChild(player)
         
-        
+        enemy.position = CGPoint(x: self.size.width/2, y: self.size.height)
+        enemySetup()
 
         tapToStartFuction()
         scoreFuction()
@@ -133,6 +138,19 @@ extension GameScene {
             contactBodyA.node?.removeFromParent()
             contactBodyB.node?.removeFromParent()
             
+        }
+        
+        //bullet contact with enemy
+        if(contactBodyA.categoryBitMask == CategoriesOfPhysics.Bullet && contactBodyB.categoryBitMask == CategoriesOfPhysics.Enemy) {
+            if let postionB = contactBodyB.node?.position {
+                enemyLiveCounter += 1
+                explosionOnContact(explosionPosition: postionB)
+                
+            }
+            
+            if(enemyLiveCounter > 5) {
+                contactBodyB.node?.removeFromParent()
+            }
         }
         
         
@@ -224,7 +242,7 @@ extension GameScene {
 //        bullet.physicsBody?.usesPreciseCollisionDetection = true
         bullet.physicsBody?.categoryBitMask = CategoriesOfPhysics.Bullet
         bullet.physicsBody?.collisionBitMask = CategoriesOfPhysics.None
-        bullet.physicsBody?.contactTestBitMask = CategoriesOfPhysics.EnemyBullet
+        bullet.physicsBody?.contactTestBitMask = CategoriesOfPhysics.EnemyBullet | CategoriesOfPhysics.Enemy
         
         bullet.zPosition = 1
         bullet.position = player.position
@@ -269,6 +287,38 @@ extension GameScene {
         enemyBullet.zRotation = calculateAngleRotate(dy : (endPont.y - startPoint.y), dx: (endPont.x - startPoint.x))
         
     }
+    
+    func enemySetup() {
+        
+        
+        enemy.zPosition = 2
+        enemy.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.8)
+        enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
+        enemy.physicsBody?.affectedByGravity = false
+        enemy.physicsBody?.allowsRotation = false
+        enemy.physicsBody?.isDynamic = true
+        enemy.physicsBody?.categoryBitMask = CategoriesOfPhysics.Enemy
+        enemy.physicsBody?.friction = 0
+        enemy.physicsBody?.restitution = 1
+        enemy.physicsBody?.linearDamping = 0
+        let border = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: self.frame.height/2, width: self.frame.width, height: self.frame.height/2))
+////        let border = SKPhysicsBody(edgeLoopFrom:frame)
+        border.friction = 0
+        border.affectedByGravity = true
+        physicsBody = border
+        
+        
+        enemy.setScale(3)
+        
+        self.addChild(enemy)
+        enemy.physicsBody?.applyImpulse(CGVector(dx: 170, dy: -250))
+        
+    }
+    
+    
+    
+    
+    
     
     func startNewLevel() {
         gameLevel += 1
