@@ -24,8 +24,14 @@ class MainMenuScene : SKScene {
     
     let startGame = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     
+    var accessibleElements: [UIAccessibilityElement] = []
     
     override func didMove(to view: SKView) {
+        
+        isAccessibilityElement       = false
+        startGame.isAccessibilityElement = true
+        heroC.isAccessibilityElement = true
+        checkmarkNode.isAccessibilityElement = true
         
         let background = SKSpriteNode(imageNamed: "background")
         background.size = self.size
@@ -185,5 +191,97 @@ extension MainMenuScene {
         
     }
     
+    
+}
+
+extension MainMenuScene {
+    
+    override func accessibilityElementCount() -> Int {
+        initAccessibility()
+        return accessibleElements.count
+    }
+
+    override func accessibilityElement(at index: Int) -> Any? {
+
+        initAccessibility()
+        if (index < accessibleElements.count) {
+            return accessibleElements[index]
+        } else {
+            return nil
+        }
+    }
+
+    override func index(ofAccessibilityElement element: Any) -> Int {
+        initAccessibility()
+        return accessibleElements.index(of: element as! UIAccessibilityElement)!
+    }
+    
+    
+    func initAccessibility() {
+
+        if accessibleElements.count == 0 {
+
+            // 1.
+            let elementForTapMe   = UIAccessibilityElement(accessibilityContainer: self.view!)
+
+            // 2.
+            var frameForStartGame = startGame.frame
+            var frameForFemaleHero = heroC.frame
+            var frameForCheckMark = checkmarkNode.frame
+
+            // From Scene to View
+            frameForStartGame.origin = (view?.convert(frameForStartGame.origin, from: self))!
+            frameForFemaleHero.origin = (view?.convert(frameForFemaleHero.origin, from: self))!
+            frameForCheckMark.origin = (view?.convert(frameForCheckMark.origin, from: self))!
+
+            // Don't forget origins are different for SpriteKit and UIKit:
+            // - SpriteKit is bottom/left
+            // - UIKit is top/left
+            //              y
+            //  ┌────┐       ▲
+            //  │    │       │   x
+            //  ◉────┘       └──▶
+            //
+            //                   x
+            //  ◉────┐       ┌──▶
+            //  │    │       │
+            //  └────┘     y ▼
+            //
+            // Thus before the following conversion, origin value indicate the bottom/left edge of the frame.
+            // We then need to move it to top/left by retrieving the height of the frame.
+            //
+
+
+            frameForStartGame.origin.y = frameForStartGame.origin.y - frameForStartGame.size.height
+            frameForFemaleHero.origin.y = frameForFemaleHero.origin.y - frameForFemaleHero.size.height
+            frameForCheckMark.origin.y = frameForCheckMark.origin.y - frameForCheckMark.size.height
+
+            // 3.
+            elementForTapMe.accessibilityLabel   = "TapToStartMainTagTest"
+            elementForTapMe.accessibilityFrame   = frameForStartGame
+            elementForTapMe.accessibilityTraits  = SKSpriteNode.accessibilityTraits()
+            // 4.
+            accessibleElements.append(elementForTapMe)
+            
+            elementForTapMe.accessibilityLabel   = "TapToSuperHeroTagTest"
+            elementForTapMe.accessibilityFrame   = frameForFemaleHero
+            elementForTapMe.accessibilityTraits  = SKSpriteNode.accessibilityTraits()
+            
+            // 4.
+            accessibleElements.append(elementForTapMe)
+
+            
+            //checkMark
+//            elementForTapMe.accessibilityLabel   = "checkMarkTagTest"
+//            elementForTapMe.accessibilityFrame   = frameForCheckMark
+//            elementForTapMe.accessibilityTraits  = SKSpriteNode.accessibilityTraits()
+//
+//            // 4.
+//            accessibleElements.append(elementForTapMe)
+            
+            
+        }
+    }
+
     
 }

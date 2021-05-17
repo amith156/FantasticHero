@@ -12,23 +12,6 @@ class FantasticHeroUITests: XCTestCase {
     override func setUp() {
         continueAfterFailure = false
     }
-    
-    func test_player_acceablity() {
-        let app = XCUIApplication()
-        app.launch()
-        
-        let node = app.otherElements["playerTagTest"]
-        XCTAssert(node.waitForExistence(timeout: 20))
-        
-    }
-    
-    func test_enemy_bullet_existence() {
-        let app = XCUIApplication()
-        app.launch()
-        
-        let node = app.otherElements["enemyBulletTagTest"]
-        XCTAssert(node.waitForExistence(timeout: 20))
-    }
 
     func test_score_existence() {
         let app = XCUIApplication()
@@ -47,6 +30,28 @@ class FantasticHeroUITests: XCTestCase {
         XCTAssert(node.waitForExistence(timeout: 20))
     }
     
+    func test_tap_to_start_main() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let node = app.otherElements["TapToStartMainTagTest"]
+        node.tap()
+        
+        XCTAssert(node.waitForExistence(timeout: 20))
+    }
+    
+    func test_tap_femail_super_hero() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let node = app.otherElements["TapToSuperHeroTagTest"]
+//        let node2 = app.otherElements["checkMarkTagTest"]
+        node.tap()
+        
+        XCTAssert(node.waitForExistence(timeout: 20))
+//        XCTAssert(node2.waitForExistence(timeout: 30))
+    }
+
     
 
 }
