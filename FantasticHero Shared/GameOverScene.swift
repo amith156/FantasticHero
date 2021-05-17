@@ -11,15 +11,21 @@ import SpriteKit
 class GameOverScene: SKScene {
     
     let restartLable = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+    let background = SKSpriteNode(imageNamed: "background")
+    let gameOverLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+    let scoreLable = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+    let highScoreLable = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+    var accessibleElements: [UIAccessibilityElement] = []
+    
     
     override func didMove(to view: SKView) {
-        let background = SKSpriteNode(imageNamed: "background")
+        
         background.size = self.size
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         background.zPosition = 0
         self.addChild(background)
         
-        let gameOverLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+        
         gameOverLabel.text = "Game Over"
         gameOverLabel.fontSize = 250
         gameOverLabel.fontColor = SKColor.white
@@ -27,7 +33,7 @@ class GameOverScene: SKScene {
         gameOverLabel.zPosition = 1
         self.addChild(gameOverLabel)
         
-        let scoreLable = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+        
         scoreLable.text = "Score: \(gameScore)"
         scoreLable.fontSize = 125
         scoreLable.fontColor = SKColor.white
@@ -43,7 +49,7 @@ class GameOverScene: SKScene {
             defaults.setValue(highScoreNum, forKey: "highScoreSaved")
         }
         
-        let highScoreLable = SKLabelNode(fontNamed: "ReggaeOne-Regular.ttf")
+        
         highScoreLable.text = "High Score: \(highScoreNum)"
         highScoreLable.fontSize = 125
         highScoreLable.fontColor = SKColor.white
@@ -59,6 +65,16 @@ class GameOverScene: SKScene {
         restartLable.position = CGPoint(x: self.size.width/2, y: self.size.height*0.3)
         self.addChild(restartLable)
     
+        
+//      Setting up Testing variables
+        isAccessibilityElement       = false
+        scoreLable.isAccessibilityElement = true
+        
+        
+    }
+    
+    override func willMove(from view: SKView) {
+        accessibleElements.removeAll()
     }
     
     
@@ -78,6 +94,80 @@ class GameOverScene: SKScene {
             
         }
     }
+    
+    
+}
+extension GameOverScene {
+    
+    override func accessibilityElementCount() -> Int {
+        initAccessibility()
+        return accessibleElements.count
+    }
+
+    override func accessibilityElement(at index: Int) -> Any? {
+
+        initAccessibility()
+        if (index < accessibleElements.count) {
+            return accessibleElements[index]
+        } else {
+            return nil
+        }
+    }
+
+    override func index(ofAccessibilityElement element: Any) -> Int {
+        initAccessibility()
+        return accessibleElements.index(of: element as! UIAccessibilityElement)!
+    }
+    
+    
+    func initAccessibility() {
+
+        if accessibleElements.count == 0 {
+
+            // 1.
+            let elementOfView   = UIAccessibilityElement(accessibilityContainer: self.view!)
+
+            // 2.
+            var frameForScore = scoreLable.frame
+
+            // From Scene to View
+            frameForScore.origin = (view?.convert(frameForScore.origin, from: self))!
+
+            // Don't forget origins are different for SpriteKit and UIKit:
+            // - SpriteKit is bottom/left
+            // - UIKit is top/left
+            //              y
+            //  ┌────┐       ▲
+            //  │    │       │   x
+            //  ◉────┘       └──▶
+            //
+            //                   x
+            //  ◉────┐       ┌──▶
+            //  │    │       │
+            //  └────┘     y ▼
+            //
+            // Thus before the following conversion, origin value indicate the bottom/left edge of the frame.
+            // We then need to move it to top/left by retrieving the height of the frame.
+            //
+
+
+            frameForScore.origin.y = frameForScore.origin.y - frameForScore.size.height
+
+
+            // 3.
+            elementOfView.accessibilityLabel   = "ScoreTagTest"
+            elementOfView.accessibilityFrame   = frameForScore
+            elementOfView.accessibilityTraits  = GameOverScene.accessibilityTraits()
+
+            // 4.
+            accessibleElements.append(elementOfView)
+
+        }
+    }
+    
+    
+    
+    
     
     
 }

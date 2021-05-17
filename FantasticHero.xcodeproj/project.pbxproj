@@ -19,8 +19,28 @@
 		5840994C264C4B31006D492B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58409936264C4B31006D492B /* Assets.xcassets */; };
 		587D3E3A264DE1D400718890 /* ReggaeOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */; };
 		58BAE0F4264DAEBC0088EC0F /* CategoriesOfPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */; };
+		58C971AB26513F8600CA268E /* FantasticHeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C971AA26513F8600CA268E /* FantasticHeroTests.swift */; };
+		58C971B326513FDF00CA268E /* GameSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C971B226513FDF00CA268E /* GameSceneTests.swift */; };
+		58D5C10B2651A9B800882D46 /* FantasticHeroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D5C10A2651A9B800882D46 /* FantasticHeroUITests.swift */; };
 		58DFEE80264E7F9400279CB0 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DFEE7F264E7F9400279CB0 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		58C971AD26513F8600CA268E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5840992E264C4B2F006D492B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5840993A264C4B31006D492B;
+			remoteInfo = "FantasticHero iOS";
+		};
+		58D5C10D2651A9B800882D46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5840992E264C4B2F006D492B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5840993A264C4B31006D492B;
+			remoteInfo = "FantasticHero iOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		58103475264F6D7900E21DF0 /* Lora-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lora-Regular.ttf"; sourceTree = "<group>"; };
@@ -37,11 +57,32 @@
 		58409948264C4B31006D492B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		587D3E39264DE1D400718890 /* ReggaeOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ReggaeOne-Regular.ttf"; sourceTree = "<group>"; };
 		58BAE0F3264DAEBC0088EC0F /* CategoriesOfPhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesOfPhysics.swift; sourceTree = "<group>"; };
+		58C971A826513F8600CA268E /* FantasticHeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FantasticHeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58C971AA26513F8600CA268E /* FantasticHeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasticHeroTests.swift; sourceTree = "<group>"; };
+		58C971AC26513F8600CA268E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58C971B226513FDF00CA268E /* GameSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTests.swift; sourceTree = "<group>"; };
+		58D5C1082651A9B800882D46 /* FantasticHeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FantasticHeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D5C10A2651A9B800882D46 /* FantasticHeroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasticHeroUITests.swift; sourceTree = "<group>"; };
+		58D5C10C2651A9B800882D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58DFEE7F264E7F9400279CB0 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		58409938264C4B31006D492B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58C971A526513F8600CA268E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D5C1052651A9B800882D46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -56,6 +97,8 @@
 			children = (
 				58409932264C4B2F006D492B /* FantasticHero Shared */,
 				5840993D264C4B31006D492B /* FantasticHero iOS */,
+				58C971A926513F8600CA268E /* FantasticHeroTests */,
+				58D5C1092651A9B800882D46 /* FantasticHeroUITests */,
 				5840993C264C4B31006D492B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				5840993B264C4B31006D492B /* FantasticHero.app */,
+				58C971A826513F8600CA268E /* FantasticHeroTests.xctest */,
+				58D5C1082651A9B800882D46 /* FantasticHeroUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +139,25 @@
 				58409948264C4B31006D492B /* Info.plist */,
 			);
 			path = "FantasticHero iOS";
+			sourceTree = "<group>";
+		};
+		58C971A926513F8600CA268E /* FantasticHeroTests */ = {
+			isa = PBXGroup;
+			children = (
+				58C971AA26513F8600CA268E /* FantasticHeroTests.swift */,
+				58C971B226513FDF00CA268E /* GameSceneTests.swift */,
+				58C971AC26513F8600CA268E /* Info.plist */,
+			);
+			path = FantasticHeroTests;
+			sourceTree = "<group>";
+		};
+		58D5C1092651A9B800882D46 /* FantasticHeroUITests */ = {
+			isa = PBXGroup;
+			children = (
+				58D5C10A2651A9B800882D46 /* FantasticHeroUITests.swift */,
+				58D5C10C2651A9B800882D46 /* Info.plist */,
+			);
+			path = FantasticHeroUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -116,17 +180,61 @@
 			productReference = 5840993B264C4B31006D492B /* FantasticHero.app */;
 			productType = "com.apple.product-type.application";
 		};
+		58C971A726513F8600CA268E /* FantasticHeroTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58C971B126513F8600CA268E /* Build configuration list for PBXNativeTarget "FantasticHeroTests" */;
+			buildPhases = (
+				58C971A426513F8600CA268E /* Sources */,
+				58C971A526513F8600CA268E /* Frameworks */,
+				58C971A626513F8600CA268E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58C971AE26513F8600CA268E /* PBXTargetDependency */,
+			);
+			name = FantasticHeroTests;
+			productName = FantasticHeroTests;
+			productReference = 58C971A826513F8600CA268E /* FantasticHeroTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		58D5C1072651A9B800882D46 /* FantasticHeroUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58D5C1112651A9B800882D46 /* Build configuration list for PBXNativeTarget "FantasticHeroUITests" */;
+			buildPhases = (
+				58D5C1042651A9B800882D46 /* Sources */,
+				58D5C1052651A9B800882D46 /* Frameworks */,
+				58D5C1062651A9B800882D46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58D5C10E2651A9B800882D46 /* PBXTargetDependency */,
+			);
+			name = FantasticHeroUITests;
+			productName = FantasticHeroUITests;
+			productReference = 58D5C1082651A9B800882D46 /* FantasticHeroUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		5840992E264C4B2F006D492B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					5840993A264C4B31006D492B = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					58C971A726513F8600CA268E = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 5840993A264C4B31006D492B;
+					};
+					58D5C1072651A9B800882D46 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 5840993A264C4B31006D492B;
 					};
 				};
 			};
@@ -144,6 +252,8 @@
 			projectRoot = "";
 			targets = (
 				5840993A264C4B31006D492B /* FantasticHero iOS */,
+				58C971A726513F8600CA268E /* FantasticHeroTests */,
+				58D5C1072651A9B800882D46 /* FantasticHeroUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -163,6 +273,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		58C971A626513F8600CA268E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D5C1062651A9B800882D46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -179,7 +303,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		58C971A426513F8600CA268E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58C971B326513FDF00CA268E /* GameSceneTests.swift in Sources */,
+				58C971AB26513F8600CA268E /* FantasticHeroTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D5C1042651A9B800882D46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58D5C10B2651A9B800882D46 /* FantasticHeroUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		58C971AE26513F8600CA268E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5840993A264C4B31006D492B /* FantasticHero iOS */;
+			targetProxy = 58C971AD26513F8600CA268E /* PBXContainerItemProxy */;
+		};
+		58D5C10E2651A9B800882D46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5840993A264C4B31006D492B /* FantasticHero iOS */;
+			targetProxy = 58D5C10D2651A9B800882D46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		58409942264C4B31006D492B /* Main.storyboard */ = {
@@ -355,6 +509,94 @@
 			};
 			name = Release;
 		};
+		58C971AF26513F8600CA268E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MQC7PD9AU;
+				INFOPLIST_FILE = FantasticHeroTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amith156.FantasticHeroTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FantasticHero.app/FantasticHero";
+			};
+			name = Debug;
+		};
+		58C971B026513F8600CA268E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MQC7PD9AU;
+				INFOPLIST_FILE = FantasticHeroTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amith156.FantasticHeroTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FantasticHero.app/FantasticHero";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58D5C10F2651A9B800882D46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MQC7PD9AU;
+				INFOPLIST_FILE = FantasticHeroUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amith156.FantasticHeroUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "FantasticHero iOS";
+			};
+			name = Debug;
+		};
+		58D5C1102651A9B800882D46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MQC7PD9AU;
+				INFOPLIST_FILE = FantasticHeroUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amith156.FantasticHeroUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "FantasticHero iOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -372,6 +614,24 @@
 			buildConfigurations = (
 				58409950264C4B31006D492B /* Debug */,
 				58409951264C4B31006D492B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58C971B126513F8600CA268E /* Build configuration list for PBXNativeTarget "FantasticHeroTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58C971AF26513F8600CA268E /* Debug */,
+				58C971B026513F8600CA268E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58D5C1112651A9B800882D46 /* Build configuration list for PBXNativeTarget "FantasticHeroUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58D5C10F2651A9B800882D46 /* Debug */,
+				58D5C1102651A9B800882D46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

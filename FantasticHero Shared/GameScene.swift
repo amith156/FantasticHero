@@ -17,11 +17,14 @@ var gameScore : Int = 0
 
 class GameScene: SKScene , SKPhysicsContactDelegate {
     
+    var accessibleElements : [UIAccessibilityElement] = []
+    
     var currentGameState = GameState.beforeGame
     let gameArea : CGRect
 
     let enemy = SKSpriteNode(imageNamed: "monster")
     let player : SKSpriteNode
+    let enemyBullet = SKSpriteNode(imageNamed: "torpedo")
     let scoreLabel = SKLabelNode(fontNamed: "ReggaeOne-Regular")
     var gameLevel :Int = 0
     var lifeLineNumber = 5
@@ -65,6 +68,10 @@ class GameScene: SKScene , SKPhysicsContactDelegate {
 extension GameScene {
     
     override func didMove(to view: SKView) {
+        
+        isAccessibilityElement = false
+        
+        
         gameScore = 0
         physicsWorld.contactDelegate = self
         let background = SKSpriteNode(imageNamed: "background")
@@ -95,7 +102,8 @@ extension GameScene {
 
         
         
-
+        background.isAccessibilityElement = true
+        
     }
     
     
@@ -267,7 +275,7 @@ extension GameScene {
         let startPoint = CGPoint(x: randomStartX, y: self.size.height + 1.4)
         let endPont = CGPoint(x: RandomEndX, y: -20)
         
-        let enemyBullet = SKSpriteNode(imageNamed: "torpedo")
+        
         enemyBullet.name = "enemyBullet"
         enemyBullet.physicsBody = SKPhysicsBody(rectangleOf: enemyBullet.size)
         enemyBullet.physicsBody?.affectedByGravity = false
@@ -476,4 +484,114 @@ extension GameScene {
     func randomRange(min : CGFloat, max : CGFloat) -> CGFloat {
         return randomRange() * (max-min) + min
     }
+}
+//MARK:- code for testing
+extension GameScene {
+    
+    override func accessibilityElementCount() -> Int {
+        initAccessibility()
+        return accessibleElements.count
+    }
+
+    override func accessibilityElement(at index: Int) -> Any? {
+
+        initAccessibility()
+        if (index < accessibleElements.count) {
+            return accessibleElements[index]
+        } else {
+            return nil
+        }
+    }
+
+    override func index(ofAccessibilityElement element: Any) -> Int {
+        initAccessibility()
+        return accessibleElements.index(of: element as! UIAccessibilityElement)!
+    }
+    
+    
+    func initAccessibility() {
+
+        if accessibleElements.count == 0 {
+
+//            // 1.
+//            let elementForPlayer   = UIAccessibilityElement(accessibilityContainer: self.view!)
+//
+//            // 2.
+//            var frameForPlayer = player.frame
+//
+//            // From Scene to View
+//            frameForPlayer.origin = (view?.convert(frameForPlayer.origin, from: self))!
+//
+//            frameForPlayer.origin.y = frameForPlayer.origin.y - frameForPlayer.size.height
+//
+//
+//            // 3.
+//            elementForPlayer.accessibilityLabel   = "playerTagTest"
+//            elementForPlayer.accessibilityFrame   = frameForPlayer
+//            elementForPlayer.accessibilityTraits  =
+//                SKSpriteNode.accessibilityTraits()
+//
+//            // 4.
+//            accessibleElements.append(elementForPlayer)
+
+
+            // 1.
+            let elementForEnemyBullet   = UIAccessibilityElement(accessibilityContainer: self.view!)
+
+            // 2.
+            var frameForEnemyBullet = enemyBullet.frame
+            var frameForTapToStart = tapToStartLable.frame
+            // From Scene to View
+            frameForEnemyBullet.origin = (view?.convert(frameForEnemyBullet.origin, from: self))!
+
+            // Don't forget origins are different for SpriteKit and UIKit:
+            // - SpriteKit is bottom/left
+            // - UIKit is top/left
+            //              y
+            //  ┌────┐       ▲
+            //  │    │       │   x
+            //  ◉────┘       └──▶
+            //
+            //                   x
+            //  ◉────┐       ┌──▶
+            //  │    │       │
+            //  └────┘     y ▼
+            //
+            // Thus before the following conversion, origin value indicate the bottom/left edge of the frame.
+            // We then need to move it to top/left by retrieving the height of the frame.
+            //
+
+
+            frameForEnemyBullet.origin.y = frameForEnemyBullet.origin.y - frameForEnemyBullet.size.height
+            frameForTapToStart.origin.y = frameForTapToStart.origin.y - frameForTapToStart.size.height
+            
+
+            // 3.
+            
+            
+            
+            elementForEnemyBullet.accessibilityLabel   = "enemyBulletTagTest"
+            elementForEnemyBullet.accessibilityFrame   = frameForEnemyBullet
+            elementForEnemyBullet.accessibilityTraits  = SKSpriteNode.accessibilityTraits()
+
+            elementForEnemyBullet.accessibilityLabel   = "TapToStartTagTest"
+            elementForEnemyBullet.accessibilityFrame   = frameForTapToStart
+            elementForEnemyBullet.accessibilityTraits  = SKSpriteNode.accessibilityTraits()
+            
+            
+            // 4.
+            
+            accessibleElements.append(elementForEnemyBullet)
+
+
+
+
+
+        }
+    }
+    
+    
+    
+    
+
 }
